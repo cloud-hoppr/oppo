@@ -58,5 +58,33 @@ if __name__ == '__main__':
 
     weather = analyzefile("temperatures.txt")
 
-    for item in weather:
-        print(item)
+    if not weather:
+        print("Не удалось загрузить данные из файла.")
+        exit()
+
+    while True:
+        print("\n" + "=" * 40)
+        print(" МЕНЮ УПРАВЛЕНИЯ ДАННЫМИ О ПОГОДЕ")
+        print("=" * 40)
+        print("1. Показать все записи")
+        print("2. Фильтрация")
+        print("0. Выход")
+        print("-" * 40)
+
+        choice = input("Выберите режим (0-2): ").strip()
+
+        if choice == "1":
+            print("\n--- Сортировка ---")
+            weather.sort(key=lambda x: x.get_temperature())
+            for item in weather:
+                print(item)
+
+        elif choice == "2":
+            print("\n--- Фильтрация ---")
+
+
+        elif choice == "0":
+            print("Выход из программы.")
+            break
+        else:
+            print("Неверный ввод. Пожалуйста, выберите 0, 1 или 2.")
