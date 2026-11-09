@@ -81,7 +81,33 @@ if __name__ == '__main__':
 
         elif choice == "2":
             print("\n--- Фильтрация ---")
+            print('\n--- Фильтрация ---')
+      user_date_str = input(
+          'Введите дату для поиска в формате ДД.ММ.ГГГГ (например,'
+          ' 25.10.2023): '
+      ).strip()
 
+      try:
+        search_date = datetime.strptime(user_date_str, '%d.%m.%Y').date()
+
+        filtered_items = [
+            item for item in weather if item.get_date() == search_date
+        ]
+
+        if filtered_items:
+          print(
+              f'\nНайдено записей за {user_date_str}: {len(filtered_items)}'
+          )
+          for item in filtered_items:
+            print(item)
+        else:
+          print(f'\nЗапрашиваемая дата ({user_date_str}) не найдена в данных.')
+
+      except ValueError:
+        print(
+            'Ошибка: Неверный формат даты! Пожалуйста, используйте формат'
+            ' ДД.ММ.ГГГГ.'
+        )
 
         elif choice == "0":
             print("Выход из программы.")
